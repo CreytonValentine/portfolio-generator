@@ -1,4 +1,6 @@
-const profileDataArgs = process.argv.slice(2, process.argv.length);
+const fs = require('fs');
+const generatePage = require('./src/page-template.js');
+const profileDataArgs = process.argv.slice(2);
 const [naMe, github] = profileDataArgs;
 
 /*
@@ -18,18 +20,9 @@ const printProfileData = profileDataArr => {
 printProfileData(profileDataArgs);
 */
 
+fs.writeFile('index.html', generatePage(naMe, github), err => {
+    if (err) throw err;
 
-//this function returns a string. recall html is string with markup language
-//notice absence of return. recall implicit return (only performing one action)
-
-const generatePage = (userName, githubName) => {
-    return `
-        Name: ${userName}
-        Github: ${githubName}
-    `;
-};
-
-console.log(generatePage("Jane", "janehub"));
-console.log(naMe, github);
-console.log(generatePage(naMe, github));
+    console.log('Portfolio complete! Check out index.html to to see the output!');
+});
 
