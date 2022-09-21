@@ -1,28 +1,25 @@
-const fs = require('fs');
-const generatePage = require('./src/page-template.js');
-const profileDataArgs = process.argv.slice(2);
-const [naMe, github] = profileDataArgs;
+const inquirer = require('inquirer');
+//const fs = require('fs');
+//const generatePage = require('./src/page-template.js');
+//const pageHTML = generatePage(name,github);
 
-/*
-// notice the lack of parenthesis around the `profileDataArr` parameter?
-const printProfileData = profileDataArr => { 
-    //this. . .
-    for (let i = 0; i < profileDataArr.length; i += 1) {
-        console.log(profileDataArr[i]);
-    }
+//fs.writeFile('./index.html', pageHTML, err => {
+    //if (err) throw err;
 
-    console.log('================');
+    //console.log('Portfolio complete! Check out index.html to to see the output!');
+//});
 
-    //Is the same as this. . .
-    profileDataArr.forEach((profileItem) => console.log(profileItem)); //takes two arguments
+const promptUser = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is your name?'
+        }
+    ]);
 };
 
-printProfileData(profileDataArgs);
-*/
+promptUser().then(answers => console.log(answers));
 
-fs.writeFile('index.html', generatePage(naMe, github), err => {
-    if (err) throw err;
 
-    console.log('Portfolio complete! Check out index.html to to see the output!');
-});
 
